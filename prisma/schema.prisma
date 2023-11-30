@@ -26,7 +26,7 @@ model Stock {
   id String @id @default(uuid())
 
   name        String @unique
-  descprition String
+  description String
 
   StockLocation StockLocation[]
 
