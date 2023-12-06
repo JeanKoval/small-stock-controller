@@ -1,13 +1,13 @@
 import {Body, Controller, Post} from '@nestjs/common';
 import {StorageEntryService} from './storage-entry.service';
-import {CreateStorageEntryDto} from "./dto/create-storage-entry.dto";
+import {CreateInventoryMovementLogDto} from "../inventory-movement-log/dtos/create-inventory-movement-log.dto";
 
 @Controller('stock/storage-entry')
 export class StorageEntryController {
   constructor(private readonly storageEntryService: StorageEntryService) {}
 
   @Post()
-  storageEntry(@Body() createStorageEntryDto: CreateStorageEntryDto){
-    return this.storageEntryService.create(createStorageEntryDto);
+  storageEntry(@Body() createInventoryMovementLogDto: CreateInventoryMovementLogDto){
+    return this.storageEntryService.storageEntry(createInventoryMovementLogDto);
   }
 }
