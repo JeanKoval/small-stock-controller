@@ -47,4 +47,25 @@ export class StockLocationService {
       }
     });
   }
+
+  storedProducts(id: string){
+    return this.prisma.stockLocation.findUniqueOrThrow({
+      where: {
+        id: id
+      },
+      select: {
+        Storage: {
+          select: {
+            Product: {
+              select: {
+                id: true,
+                code: true
+              }
+            },
+            amount: true
+          }
+        }
+      }
+    });
+  }
 }

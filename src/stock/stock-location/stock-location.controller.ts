@@ -32,4 +32,9 @@ export class StockLocationController {
   remove(@Param('id') id: string) {
     return this.stockLocationService.remove(id);
   }
+
+  @Get('stored-products/:id')
+  storedProducts(@Param('id') id: string){
+    return this.stockLocationService.storedProducts(id);
+  }
 }
