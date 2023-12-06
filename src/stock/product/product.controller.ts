@@ -32,4 +32,9 @@ export class ProductController {
   remove(@Param('id') id: string) {
     return this.productService.remove(id);
   }
+
+  @Get('amount-stock/:id')
+  getAmountStock(@Param('id') id: string){
+    return this.productService.getAmountStock(id);
+  }
 }
