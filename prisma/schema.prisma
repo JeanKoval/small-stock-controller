@@ -15,7 +15,7 @@ model Product {
   price       Float
 
   Storage              Storage[]
-  StockProductEntryLog StockProductEntryLog[]
+  StockProductEntryLog InventoryMovementLog[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -47,7 +47,7 @@ model StockLocation {
   stock Stock @relation(fields: [stock_id], references: [id])
 
   Storage              Storage[]
-  StockProductEntryLog StockProductEntryLog[]
+  StockProductEntryLog InventoryMovementLog[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -71,17 +71,23 @@ model Storage {
   @@map("storages")
 }
 
-model StockProductEntryLog {
+enum TypeInventoryMovementLog {
+  Exit
+  Entry
+}
+
+model InventoryMovementLog {
   id String @id @default(uuid())
 
   amount_stored     Float
-  StockLocation     StockLocation @relation(fields: [stock_location_id], references: [id])
+  StockLocation     StockLocation            @relation(fields: [stock_location_id], references: [id])
   stock_location_id String
-  Product           Product       @relation(fields: [product_id], references: [id])
+  Product           Product                  @relation(fields: [product_id], references: [id])
   product_id        String
+  type              TypeInventoryMovementLog @default(Entry)
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  @@map("stock_product_entry_logs")
+  @@map("invetory_movement_logs")
 }
