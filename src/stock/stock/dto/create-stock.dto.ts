@@ -1,4 +1,4 @@
 export class CreateStockDto {
-    name: string
-    description: string
+    name: string;
+    description: string;
 }

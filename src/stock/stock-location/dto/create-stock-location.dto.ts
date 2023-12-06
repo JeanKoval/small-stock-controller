@@ -1,5 +1,5 @@
 export class CreateStockLocationDto {
-    code: string
-    description: string
-    stock_id: string
+    code: string;
+    description: string;
+    stock_id: string;
 }
