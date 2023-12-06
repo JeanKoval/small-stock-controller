@@ -16,8 +16,9 @@ model Product {
 
   Storage Storage[]
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at           DateTime               @default(now())
+  updated_at           DateTime               @updatedAt
+  StockProductEntryLog StockProductEntryLog[]
 
   @@map("products")
 }
@@ -47,8 +48,9 @@ model StockLocation {
 
   Storage Storage[]
 
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  created_at           DateTime               @default(now())
+  updated_at           DateTime               @updatedAt
+  StockProductEntryLog StockProductEntryLog[]
 
   @@map("stock_locations")
 }
@@ -67,4 +69,19 @@ model Storage {
   updated_at DateTime @updatedAt
 
   @@map("storages")
+}
+
+model StockProductEntryLog {
+  id String @id @default(uuid())
+
+  amount_stored     Float
+  StockLocation     StockLocation? @relation(fields: [stock_location_id], references: [id])
+  stock_location_id String?
+  Product           Product?       @relation(fields: [product_id], references: [id])
+  product_id        String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("stock_product_entry_logs")
 }
