@@ -14,11 +14,11 @@ model Product {
   description String
   price       Float
 
-  Storage Storage[]
-
-  created_at           DateTime               @default(now())
-  updated_at           DateTime               @updatedAt
+  Storage              Storage[]
   StockProductEntryLog StockProductEntryLog[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("products")
 }
@@ -46,11 +46,11 @@ model StockLocation {
 
   stock Stock @relation(fields: [stock_id], references: [id])
 
-  Storage Storage[]
-
-  created_at           DateTime               @default(now())
-  updated_at           DateTime               @updatedAt
+  Storage              Storage[]
   StockProductEntryLog StockProductEntryLog[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("stock_locations")
 }
@@ -60,10 +60,10 @@ model Storage {
 
   amount Float
 
-  StockLocation     StockLocation? @relation(fields: [stock_location_id], references: [id])
-  stock_location_id String?
-  Product           Product?       @relation(fields: [product_id], references: [id])
-  product_id        String?
+  StockLocation     StockLocation @relation(fields: [stock_location_id], references: [id])
+  stock_location_id String
+  Product           Product       @relation(fields: [product_id], references: [id])
+  product_id        String
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -75,10 +75,10 @@ model StockProductEntryLog {
   id String @id @default(uuid())
 
   amount_stored     Float
-  StockLocation     StockLocation? @relation(fields: [stock_location_id], references: [id])
-  stock_location_id String?
-  Product           Product?       @relation(fields: [product_id], references: [id])
-  product_id        String?
+  StockLocation     StockLocation @relation(fields: [stock_location_id], references: [id])
+  stock_location_id String
+  Product           Product       @relation(fields: [product_id], references: [id])
+  product_id        String
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
